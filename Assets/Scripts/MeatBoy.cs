@@ -27,6 +27,7 @@ public class MeatBoy : MonoBehaviour{
     bool IsMoving = true;
     public Animator animator;
     public int reSpawnTime = 2;
+    public GameObject bodyRotate;
     // public GameObject respawnPosition;
     private void Awake() {
         controller = GetComponent<CharacterController>();
@@ -50,7 +51,7 @@ public class MeatBoy : MonoBehaviour{
         mouvement.x = Input.GetAxisRaw("Horizontal");
         mouvement.y -= gravity * Time.deltaTime;
         if(mouvement.x>0){
-             this.gameObject.transform.rotation = Quaternion.Euler(0f,0f,0f);
+             bodyRotate.transform.rotation = Quaternion.Euler(0f,0f,0f);
                animator.SetBool("Move", true);
         }
         if(mouvement.x<0 && facingRight){
@@ -143,8 +144,8 @@ public class MeatBoy : MonoBehaviour{
     }
     void flip(){
         facingRight = !facingRight;
-        //transform.Rotate(0f,180f,0f);
-        this.gameObject.transform.rotation = Quaternion.Euler(0f,180f,0f);
+        bodyRotate.transform.Rotate(0f,180f,0f);
+        // this.gameObject.transform.rotation = Quaternion.Euler(0f,180f,0f);
     }
 
 
