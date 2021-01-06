@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
 
     //damage to player:
     public int damage = 20;
+    public int Speed = 10;
 
     private void Awake(){
         player = GameObject.Find("FraiseBoy").transform;

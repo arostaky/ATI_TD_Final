@@ -128,10 +128,11 @@ public class MeatBoy : MonoBehaviour{
         controller.Move(rp);
     }
     public void Fly(){
-       mouvement.y +=0.11f*jetPackSpeed;
-       if(jetPackHeat > jetPackMaxHeat){
-           mouvement.y = 0 - gravity/10;
-       }
+    //    mouvement.y +=0.11f*jetPackSpeed;
+        mouvement.y = jetPackSpeed;
+        if(jetPackHeat > jetPackMaxHeat){
+            mouvement.y = 0 - gravity/10;
+        }
 
     }
     public void SuperSpeed(){
