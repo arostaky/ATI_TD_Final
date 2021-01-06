@@ -44,7 +44,7 @@ public class MeatBoy : MonoBehaviour{
         heatBar.setMaxJetPack(jetPackMaxHeat);
     }
     void Update() {
-        allAnimation();
+        //allAnimation();
         // CONTROLS
         if (controller == null)
             return;
@@ -52,7 +52,7 @@ public class MeatBoy : MonoBehaviour{
         mouvement.y -= gravity * Time.deltaTime;
         if(mouvement.x>0){
              bodyRotate.transform.rotation = Quaternion.Euler(0f,0f,0f);
-               animator.SetBool("Move", true);
+            //    animator.SetBool("Move", true);
         }
         if(mouvement.x<0 && facingRight){
             flip();
@@ -68,7 +68,7 @@ public class MeatBoy : MonoBehaviour{
 
         } 
         if (mouvement.x == 0){
-              animator.SetBool("Move", false);
+            //   animator.SetBool("Move", false);
             
         }
         // this didn't work: if(Input.GetButtonDown("Jump")){
@@ -76,20 +76,20 @@ public class MeatBoy : MonoBehaviour{
             if(jumpsCount < jumpsMax){
                 jumpsCount++;
                 mouvement.y = jumpSpeed;
-                 animator.SetBool("jump", true);
+                //  animator.SetBool("jump", true);
             }
             //Debug.Log(jumpsCount);
             // Création des gouttes quand MeatBoy Jump:
             Instantiate(gouttePrefab, transform.position, Quaternion.identity);
         } else if(Input.GetKeyUp(KeyCode.Z)){
-            animator.SetBool("jump", false);
+            // animator.SetBool("jump", false);
 
         }
         controller.Move(mouvement * Time.deltaTime * speed);
         // Création des gouttes quand MeatBoy court:
         if(mouvement.x != 0f){
             IsMoving = true;
-            allAnimation();
+            // allAnimation();
             // <=================animator setbool
             cptGoutte -= Time.deltaTime;
             //Debug.Log(cptGoutte);
@@ -149,20 +149,20 @@ public class MeatBoy : MonoBehaviour{
     }
 
 
-    void allAnimation(){
-       if(Input.GetKeyDown(KeyCode.Space)) {
+    // void allAnimation(){
+    //    if(Input.GetKeyDown(KeyCode.Space)) {
 
-             animator.SetBool("jump", true);
-             animator.SetBool("lift", true);
+    //          animator.SetBool("jump", true);
+    //          animator.SetBool("lift", true);
         
-        } else if(Input.GetKeyUp(KeyCode.Space)) {
+    //     } else if(Input.GetKeyUp(KeyCode.Space)) {
 
-             animator.SetBool("jump", false);
-             animator.SetBool("lift", false);
-        }
+    //          animator.SetBool("jump", false);
+    //          animator.SetBool("lift", false);
+    //     }
       
 
-     } 
+    //  } 
 
     
 
