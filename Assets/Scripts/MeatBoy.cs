@@ -124,7 +124,8 @@ public class MeatBoy : MonoBehaviour{
     public void MoveBody(){
         currentHealth = maxHealth;
         controller.enabled = true;
-        Vector3 rp = GameObject.FindGameObjectWithTag("respawn").transform.position;
+        Vector3 rp = GameObject.FindGameObjectWithTag("Respawn").transform.position;
+        //Instantiate(gameObject, rp, Quaternion.identity);
         controller.Move(rp);
     }
     public void Fly(){
