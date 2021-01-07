@@ -38,6 +38,10 @@ public class Enemy : MonoBehaviour
         if(!playerInSightRange && !playerInAttackRange) Patroling();
         if(playerInSightRange && !playerInAttackRange) ChasePlayer();
         if(playerInAttackRange && playerInSightRange) AttackPlayer();
+        //Lock Z position:
+         Vector3 pos = transform.position;
+         pos.z = 71f;
+         transform.position = pos;
 
     }
     private void Patroling(){
@@ -56,7 +60,7 @@ public class Enemy : MonoBehaviour
     private void SearchWalkPoint(){
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         //float randomY = Random.Range(-walkPointRange, walkPointRange);
-        walkPoint =  new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        walkPoint =  new Vector3(transform.position.x, transform.position.y, 71f);
         if(Physics.Raycast(walkPoint,transform.forward, 2f, whatIsGround)){
             walkPointSet = true;
         }
@@ -67,6 +71,8 @@ public class Enemy : MonoBehaviour
     private void AttackPlayer(){
         EnemyWeapon enemyWeapon = gameObject.GetComponent<EnemyWeapon>();
         agent.SetDestination(transform.position);
+        //this comment line is an idea on how to constrain the enemy...
+        //Vector3 newPlayerPosition = new Vector3( player.position.x, player.position.y, this.transform.position.z );
         transform.LookAt(player);
         if(!alreadyAttacked){
             enemyWeapon.Shoot();
