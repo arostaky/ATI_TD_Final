@@ -28,8 +28,11 @@ public class CoolDown : MonoBehaviour
                 nextJetPackTime = Time.time + CoolDownTime/4;
                 meatboy.Fly();
                 meatboy.jetPackHeat+= Time.time/1000 + meatboy.jetPackHeatCount;
+                
         
-    }
+        }else{
+            animator.SetBool("lift", false);
+        }
 
 }
 }

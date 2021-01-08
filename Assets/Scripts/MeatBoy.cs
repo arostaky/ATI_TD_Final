@@ -136,6 +136,9 @@ public class MeatBoy : MonoBehaviour{
         if(jetPackHeat > jetPackMaxHeat){
             mouvement.y = 0 - gravity/10;
         }
+        if(mouvement.x == 0 ){
+            animator.SetBool("lift", true);
+        }
 
     }
     public void SuperSpeed(){

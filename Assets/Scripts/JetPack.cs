@@ -45,8 +45,8 @@ public class JetPack : MonoBehaviour{
 
     }
     public void UseJetPack(){
-        currentVector = Vector3.up;
-        rb.AddForce(currentVector * speed);
+        // currentVector = Vector3.up;
+        // rb.AddForce(currentVector * speed);
         // currentVector += transform.up * Input.GetAxis("Horizontal");
         // currentVector += transform.up * Input.GetAxis("Vertical");
 
