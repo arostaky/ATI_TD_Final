@@ -49,10 +49,10 @@ public class MeatBoy : MonoBehaviour{
         if (controller == null)
             return;
         mouvement.x = Input.GetAxisRaw("Horizontal");
+        // Debug.Log(mouvement.x);
         mouvement.y -= gravity * Time.deltaTime;
         if(mouvement.x>0){
              bodyRotate.transform.rotation = Quaternion.Euler(0f,0f,0f);
-            //    animator.SetBool("Move", true);
         }
         if(mouvement.x<0 && facingRight){
             flip();
@@ -68,8 +68,10 @@ public class MeatBoy : MonoBehaviour{
 
         } 
         if (mouvement.x == 0){
-            //   animator.SetBool("Move", false);
-            
+            animator.SetBool("Move", false);
+        }
+        if(mouvement.x != 0){
+             animator.SetBool("Move", true);
         }
         // this didn't work: if(Input.GetButtonDown("Jump")){
         if(Input.GetKeyDown(KeyCode.Z)){
@@ -129,8 +131,8 @@ public class MeatBoy : MonoBehaviour{
         controller.Move(rp);
     }
     public void Fly(){
-    //    mouvement.y +=0.11f*jetPackSpeed;
-        mouvement.y = jetPackSpeed;
+       mouvement.y = 0.11f * jetPackSpeed + Time.deltaTime;
+        // mouvement.y = jetPackSpeed;
         if(jetPackHeat > jetPackMaxHeat){
             mouvement.y = 0 - gravity/10;
         }

@@ -14,9 +14,9 @@ public class Weapon : MonoBehaviour
             Shoot();
             animator.SetBool("shoot", true);
             
-            }else if (Input.GetButtonUp("Fire1")){
-                 animator.SetBool("shoot", false);
-            }
+        }else{
+            animator.SetBool("shoot", false);
+        }
 
         
     }

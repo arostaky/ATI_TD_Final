@@ -27,6 +27,9 @@ public class Enemy : MonoBehaviour
     public int damage = 20;
     public int Speed = 10;
 
+    //fixed Z:
+    public float fixedZ = 70f;
+
     private void Awake(){
         player = GameObject.Find("FraiseBoy").transform;
         agent = GetComponent<NavMeshAgent>();
@@ -40,7 +43,7 @@ public class Enemy : MonoBehaviour
         if(playerInAttackRange && playerInSightRange) AttackPlayer();
         //Lock Z position:
          Vector3 pos = transform.position;
-         pos.z = 71f;
+         pos.z = fixedZ;
          transform.position = pos;
 
     }
@@ -60,7 +63,7 @@ public class Enemy : MonoBehaviour
     private void SearchWalkPoint(){
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         //float randomY = Random.Range(-walkPointRange, walkPointRange);
-        walkPoint =  new Vector3(transform.position.x, transform.position.y, 71f);
+        walkPoint =  new Vector3(transform.position.x, transform.position.y,fixedZ);
         if(Physics.Raycast(walkPoint,transform.forward, 2f, whatIsGround)){
             walkPointSet = true;
         }
