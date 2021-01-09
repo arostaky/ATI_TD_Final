@@ -71,7 +71,9 @@
      <Compile Include="Assets\Scripts\JetPackBar.cs" />
      <Compile Include="Assets\Scripts\LevelManager.cs" />
      <Compile Include="Assets\Scripts\MeatBoy.cs" />
+     <Compile Include="Assets\Scripts\PlayButton.cs" />
      <Compile Include="Assets\Scripts\Projectile.cs" />
+     <Compile Include="Assets\Scripts\QuitButton.cs" />
      <Compile Include="Assets\Scripts\Reward.cs" />
      <Compile Include="Assets\Scripts\Scie.cs" />
      <Compile Include="Assets\Scripts\Victory.cs" />

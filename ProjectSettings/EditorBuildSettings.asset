@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Nivel.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/Menu.unity
+    guid: 6d558602a15a1d65a896f2736a9c779a
   - enabled: 1
-    path: Assets/Scenes/Victory.unity
-    guid: b9845bf1e147f880580e421861b2485b
+    path: Assets/Spaceship_Level_Asset/level1.unity
+    guid: 8a4edf5d9b2944e46b1cde737b354987
   m_configObjects: {}
