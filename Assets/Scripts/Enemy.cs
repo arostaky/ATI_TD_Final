@@ -26,6 +26,8 @@ public class Enemy : MonoBehaviour
     //damage to player:
     public int damage = 20;
     public int Speed = 10;
+    //player status:
+    private MeatBoy playerStatus;
 
     //fixed Z:
     public float fixedZ = 70f;
@@ -34,6 +36,10 @@ public class Enemy : MonoBehaviour
         player = GameObject.Find("FraiseBoy").transform;
         agent = GetComponent<NavMeshAgent>();
     }
+    // private void Start(){
+    //     playerStatus = FindObjectOfType<MeatBoy>();
+    //     Debug.Log(playerStatus.playerIsDead);
+    // }
     private void Update() {
         // Check for sight and attack range
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
@@ -77,7 +83,8 @@ public class Enemy : MonoBehaviour
         //this comment line is an idea on how to constrain the enemy...
         //Vector3 newPlayerPosition = new Vector3( player.position.x, player.position.y, this.transform.position.z );
         transform.LookAt(player);
-        if(!alreadyAttacked){
+        playerStatus = FindObjectOfType<MeatBoy>();
+        if(!alreadyAttacked && playerStatus.playerIsDead == false){
             enemyWeapon.Shoot();
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
@@ -111,7 +118,7 @@ public class Enemy : MonoBehaviour
     void OnTriggerEnter(Collider hitInfo) {
         MeatBoy player = hitInfo.GetComponent<MeatBoy>();
         Debug.Log(hitInfo);
-         if (player != null){
+         if (player != null && player.playerIsDead == false){
              player.TakeDamage(damage);
          }
     }

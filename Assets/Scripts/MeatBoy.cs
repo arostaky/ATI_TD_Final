@@ -29,6 +29,7 @@ public class MeatBoy : MonoBehaviour{
     public int reSpawnTime = 2;
     public GameObject bodyRotate;
     public Rigidbody rb;
+    public bool playerIsDead = false;
     // public GameObject respawnPosition;
     private void Awake() {
         controller = GetComponent<CharacterController>();
@@ -43,6 +44,7 @@ public class MeatBoy : MonoBehaviour{
         currentHealth = maxHealth;
         healthBar.setMaxHealth(maxHealth);
         heatBar.setMaxJetPack(jetPackMaxHeat);
+        mouvement.y = 0;
     }
     void Update() {
         //allAnimation();
@@ -110,18 +112,23 @@ public class MeatBoy : MonoBehaviour{
         //transform.position = defaultPosition;
         controller.enabled = false;
         animator.SetBool("Death", true);
-        //Destroy(gameObject);
+        mouvement.y = 0;
+        mouvement.x = 0;
+        // Destroy(this.gameObject);
         Invoke("MoveBody", reSpawnTime);
-        
-        Debug.LogError("die");
+        playerIsDead = true;
+        // Debug.LogError("die");
     }
     public void MoveBody(){
         currentHealth = maxHealth;
+        healthBar.setMaxHealth(currentHealth);
         controller.enabled = true;
         animator.SetBool("Death", false);
         Vector3 rp = GameObject.FindGameObjectWithTag("Respawn").transform.position;
-        //Instantiate(gameObject, rp, Quaternion.identity);
-        controller.Move(rp);
+        playerIsDead = false;
+        // Instantiate(gameObject, rp, Quaternion.identity);
+        
+        controller.SimpleMove(rp * speed * Time.deltaTime);
     }
     public void Fly(){
         // Vector3 currentVector = Vector3.up;
