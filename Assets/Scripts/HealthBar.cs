@@ -7,6 +7,8 @@ public class HealthBar : MonoBehaviour
     public Slider slider;
     public Gradient gradient;
     public Image fill;
+    public Text livesUI;
+    private string livesString;
     public void setMaxHealth(int health){
         slider.maxValue = health;
         slider.value = health;
@@ -15,5 +17,9 @@ public class HealthBar : MonoBehaviour
     public void setHealth(int health){
         slider.value = health;
         fill.color = gradient.Evaluate(slider.normalizedValue);
+    }
+    public void setLives(int lives){
+         livesString = "x " + lives + "";
+         livesUI.text = livesString;
     }
 }

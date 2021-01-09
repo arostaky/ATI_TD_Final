@@ -9,13 +9,6 @@ public class Reward : MonoBehaviour
     public float zSpeed = 0.0f;
     public int health = -10;
     public Transform rewardItem;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {

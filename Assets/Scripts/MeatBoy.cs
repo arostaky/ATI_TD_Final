@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 [RequireComponent(typeof(CharacterController))]
 public class MeatBoy : MonoBehaviour{
     public float speed;
@@ -30,6 +31,7 @@ public class MeatBoy : MonoBehaviour{
     public GameObject bodyRotate;
     public Rigidbody rb;
     public bool playerIsDead = false;
+    public int lives = 1;
     // public GameObject respawnPosition;
     private void Awake() {
         controller = GetComponent<CharacterController>();
@@ -43,6 +45,7 @@ public class MeatBoy : MonoBehaviour{
     void Start() { 
         currentHealth = maxHealth;
         healthBar.setMaxHealth(maxHealth);
+        healthBar.setLives(lives);
         heatBar.setMaxJetPack(jetPackMaxHeat);
         mouvement.y = 0;
     }
@@ -101,15 +104,7 @@ public class MeatBoy : MonoBehaviour{
         }
         heatBar.setJetPack(jetPackHeat);
     }
-    // nice trick for debugging:
-    // private void OnControllerColliderHit(ControllerColliderHit hit){
-    //     Debug.Log(hit.gameObject.name);
-
-    //     hit.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
-    // }
     public void Die(){
-        // this is only working when i destroy the character...
-        //transform.position = defaultPosition;
         controller.enabled = false;
         animator.SetBool("Death", true);
         mouvement.y = 0;
@@ -117,6 +112,13 @@ public class MeatBoy : MonoBehaviour{
         // Destroy(gameObject);
         Invoke("MoveBody", reSpawnTime);
         playerIsDead = true;
+        healthBar.setLives(lives);
+        if(lives <= 0){
+            Debug.LogError("die");
+            SceneManager.LoadScene("Menu");
+            // LevelManager levelmanager = GetComponent<LevelManager>();
+            // levelmanager.restart();
+        }
         // Debug.LogError("die");
     }
     public void MoveBody(){
@@ -124,18 +126,10 @@ public class MeatBoy : MonoBehaviour{
         healthBar.setMaxHealth(currentHealth);
         controller.enabled = true;
         animator.SetBool("Death", false);
-        // Vector3 rp = GameObject.FindGameObjectWithTag("Respawn").transform.position;
         playerIsDead = false;
-        // controller.Move(transform.position);
-        // transform.position = defaultPosition;
-        // controller.SimpleMove();
-        //Instantiate(gameObject, transform.position, Quaternion.identity);
-        // controller.SimpleMove(rp * speed * Time.deltaTime);
+
     }
     public void Fly(){
-        // Vector3 currentVector = Vector3.up;
-    //    mouvement.y = 0.11f * jetPackSpeed + Time.deltaTime;
-        // rb.AddForce(currentVector * jetPackSpeed);
          mouvement.y = jetPackSpeed;
         if(jetPackHeat > jetPackMaxHeat && !controller.isGrounded){
             mouvement.y = 0 - gravity/10;
@@ -159,23 +153,8 @@ public class MeatBoy : MonoBehaviour{
         bodyRotate.transform.Rotate(0f,180f,0f);
         // this.gameObject.transform.rotation = Quaternion.Euler(0f,180f,0f);
     }
-
-
-    // void allAnimation(){
-    //    if(Input.GetKeyDown(KeyCode.Space)) {
-
-    //          animator.SetBool("jump", true);
-    //          animator.SetBool("lift", true);
-        
-    //     } else if(Input.GetKeyUp(KeyCode.Space)) {
-
-    //          animator.SetBool("jump", false);
-    //          animator.SetBool("lift", false);
-    //     }
-      
-
-    //  } 
-
-    
+    public void countLives(){
+        lives-=1;
+    }
 
 }
