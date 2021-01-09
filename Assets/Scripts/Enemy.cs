@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     public int health = 100;
     public GameObject deathEffect;
     public NavMeshAgent agent;
-    public Transform player;
+    private Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
     //Patroling:
 
@@ -32,6 +32,9 @@ public class Enemy : MonoBehaviour
     //fixed Z:
     public float fixedZ = 70f;
 
+    //reward:
+    private bool isDead = false;
+    public GameObject rewardPrefab;
     private void Awake(){
         player = GameObject.Find("FraiseBoy").transform;
         agent = GetComponent<NavMeshAgent>();
@@ -98,9 +101,11 @@ public class Enemy : MonoBehaviour
         health-= damage;
         if(health<=0){
             Die();
+            Instantiate(rewardPrefab, transform.position, Quaternion.identity);
         }
     }
     void Die(){
+        isDead = true;
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

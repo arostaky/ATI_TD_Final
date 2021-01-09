@@ -114,7 +114,7 @@ public class MeatBoy : MonoBehaviour{
         animator.SetBool("Death", true);
         mouvement.y = 0;
         mouvement.x = 0;
-        // Destroy(this.gameObject);
+        // Destroy(gameObject);
         Invoke("MoveBody", reSpawnTime);
         playerIsDead = true;
         // Debug.LogError("die");
@@ -124,11 +124,13 @@ public class MeatBoy : MonoBehaviour{
         healthBar.setMaxHealth(currentHealth);
         controller.enabled = true;
         animator.SetBool("Death", false);
-        Vector3 rp = GameObject.FindGameObjectWithTag("Respawn").transform.position;
+        // Vector3 rp = GameObject.FindGameObjectWithTag("Respawn").transform.position;
         playerIsDead = false;
-        // Instantiate(gameObject, rp, Quaternion.identity);
-        
-        controller.SimpleMove(rp * speed * Time.deltaTime);
+        // controller.Move(transform.position);
+        // transform.position = defaultPosition;
+        // controller.SimpleMove();
+        //Instantiate(gameObject, transform.position, Quaternion.identity);
+        // controller.SimpleMove(rp * speed * Time.deltaTime);
     }
     public void Fly(){
         // Vector3 currentVector = Vector3.up;

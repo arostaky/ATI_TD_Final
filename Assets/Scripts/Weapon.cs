@@ -12,10 +12,10 @@ public class Weapon : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1")){
             Shoot();
-            animator.SetBool("shoot", true);
+            // animator.SetBool("shoot", true);
             
         }else{
-            animator.SetBool("shoot", false);
+            // animator.SetBool("shoot", false);
         }
 
         
