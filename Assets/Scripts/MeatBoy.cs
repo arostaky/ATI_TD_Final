@@ -33,6 +33,8 @@ public class MeatBoy : MonoBehaviour{
     public bool playerIsDead = false;
     public int lives = 1;
     // public GameObject respawnPosition;
+    // sound:
+    AudioSource audio;
     private void Awake() {
         controller = GetComponent<CharacterController>();
         if (controller == null){
@@ -48,6 +50,7 @@ public class MeatBoy : MonoBehaviour{
         healthBar.setLives(lives);
         heatBar.setMaxJetPack(jetPackMaxHeat);
         mouvement.y = 0;
+        audio = GetComponent<AudioSource>();
     }
     void Update() {
         //allAnimation();
@@ -129,11 +132,13 @@ public class MeatBoy : MonoBehaviour{
     }
     public void Fly(){
         // gameObject.GetComponentInChildren<ParticleSystem>.isPlaying = true;
-         mouvement.y = jetPackSpeed;
+        mouvement.y = jetPackSpeed;
+        audio.Play(0);
         if(jetPackHeat > jetPackMaxHeat && !controller.isGrounded){
             mouvement.y = 0 - gravity/10;
         }
         if(mouvement.x == 0 ){
+            
             animator.SetBool("lift", true);
         }
 

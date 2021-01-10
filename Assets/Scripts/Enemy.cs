@@ -35,14 +35,18 @@ public class Enemy : MonoBehaviour
     //reward:
     private bool isDead = false;
     public GameObject rewardPrefab;
+
+    //audio:
+    AudioSource audio;
+    private bool isPlaying = false;
+
     private void Awake(){
         player = GameObject.Find("FraiseBoy").transform;
         agent = GetComponent<NavMeshAgent>();
     }
-    // private void Start(){
-    //     playerStatus = FindObjectOfType<MeatBoy>();
-    //     Debug.Log(playerStatus.playerIsDead);
-    // }
+    private void Start(){
+        audio = GetComponent<AudioSource>(); 
+    }
     private void Update() {
         // Check for sight and attack range
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
@@ -79,6 +83,10 @@ public class Enemy : MonoBehaviour
     }
     private void ChasePlayer(){
         agent.SetDestination(player.position);
+        if(isPlaying == false){
+            playSound();
+        }
+        
     }
     private void AttackPlayer(){
         EnemyWeapon enemyWeapon = gameObject.GetComponent<EnemyWeapon>();
@@ -126,5 +134,9 @@ public class Enemy : MonoBehaviour
          if (player != null && player.playerIsDead == false){
              player.TakeDamage(damage);
          }
+    }
+    void playSound(){
+        audio.Play(0);
+        isPlaying = true;
     }
 }
