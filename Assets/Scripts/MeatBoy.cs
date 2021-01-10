@@ -35,6 +35,7 @@ public class MeatBoy : MonoBehaviour{
     // public GameObject respawnPosition;
     // sound:
     AudioSource audio;
+    // private bool isPlaying = false;
     private void Awake() {
         controller = GetComponent<CharacterController>();
         if (controller == null){
@@ -133,7 +134,6 @@ public class MeatBoy : MonoBehaviour{
     public void Fly(){
         // gameObject.GetComponentInChildren<ParticleSystem>.isPlaying = true;
         mouvement.y = jetPackSpeed;
-        audio.Play(0);
         if(jetPackHeat > jetPackMaxHeat && !controller.isGrounded){
             mouvement.y = 0 - gravity/10;
         }
@@ -164,5 +164,14 @@ public class MeatBoy : MonoBehaviour{
     public void countLives(){
         lives--;
     }
-
+    public void playSound(bool isPlaying){
+        // isPlaying = !isPlaying;
+        if(isPlaying){
+            audio.Play(0);
+        }else{
+            // audio.loop = true;
+            // audio.clip = xsound;  
+            audio.Stop();
+        }
+    }
 }
