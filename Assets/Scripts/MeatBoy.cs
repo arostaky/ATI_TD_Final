@@ -69,6 +69,7 @@ public class MeatBoy : MonoBehaviour{
               
             // mouvement.y = 0;
             jumpsCount = 0;
+            // gameObject.GetComponentInChildren<ParticleSystem>.isPlaying = false;
             // jetPackFuel++;
             // Debug.Log(jetPackFuel);
 
@@ -99,9 +100,6 @@ public class MeatBoy : MonoBehaviour{
             cptGoutte -= Time.deltaTime;
 
         }
-        if(currentHealth<=0){
-            Die();
-        }
         heatBar.setJetPack(jetPackHeat);
     }
     public void Die(){
@@ -130,6 +128,7 @@ public class MeatBoy : MonoBehaviour{
 
     }
     public void Fly(){
+        // gameObject.GetComponentInChildren<ParticleSystem>.isPlaying = true;
          mouvement.y = jetPackSpeed;
         if(jetPackHeat > jetPackMaxHeat && !controller.isGrounded){
             mouvement.y = 0 - gravity/10;
@@ -147,6 +146,10 @@ public class MeatBoy : MonoBehaviour{
         Instantiate(gouttePrefab, transform.position, Quaternion.identity);
         currentHealth -= damage;
         healthBar.setHealth(currentHealth);
+        if(currentHealth<=0){
+            countLives();
+            Die();
+        }
     }
     void flip(){
         facingRight = !facingRight;
@@ -154,7 +157,7 @@ public class MeatBoy : MonoBehaviour{
         // this.gameObject.transform.rotation = Quaternion.Euler(0f,180f,0f);
     }
     public void countLives(){
-        lives-=1;
+        lives--;
     }
 
 }
